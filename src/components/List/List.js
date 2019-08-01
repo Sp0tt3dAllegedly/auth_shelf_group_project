@@ -10,16 +10,16 @@ import { connect } from 'react-redux';
 
 class List extends Component {
     componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_LIST' })
+        this.props.dispatch({ type: 'FETCH_LIST',  })
     }
 
     render() {
         return (
             <ul>
-                {this.props.storeInstance.item.map(item => {
+                {this.props.reduxState.list.map(item => {
                     return (
                         <li key={item.id}>
-                            <p>{item.description}<br />{item.image_url}</p>
+                            <p>{item.description}<br /><img src={item.image_url} alt="" /></p>
 
 
                         </li>    
@@ -30,5 +30,9 @@ class List extends Component {
 
 }
 }
-export default connect()(List);
+
+const mapStateToProps = reduxState => ({
+    reduxState,
+});
+export default connect(mapStateToProps)(List);
 
