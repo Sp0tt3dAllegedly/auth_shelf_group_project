@@ -1,13 +1,28 @@
 const express = require('express');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
 /**
  * Get all of the items on the shelf
  */
-router.get('/', (req, res) => {
-    res.sendStatus(200); // For testing only, can be removed
+
+router.get('/info', rejectUnauthenticated, (req, res) => {
+    console.log('/info GET route');
+    console.log('is authenticated?', req.isAuthenticated());
+    console.log('user', req.user); 
+    let queryText = `SELECT * FROM "item"`;
+    pool.query(queryText)
+    .then((result) => {
+        res.send(result.rows);
+    }) 
+     
+    .catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    });
 });
+
 
 
 /**
@@ -42,7 +57,7 @@ router.get('/count', (req, res) => {
 
 });
 
-// hi there pandas
+
 /**
  * Return a specific item by id
  */
