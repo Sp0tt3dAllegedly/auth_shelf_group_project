@@ -11,7 +11,7 @@ router.get('/info', rejectUnauthenticated, (req, res) => {
     console.log('/info GET route');
     console.log('is authenticated?', req.isAuthenticated());
     console.log('user', req.user); 
-    let queryText = `SELECT * FROM "item"`;
+    let queryText = `SELECT * FROM "item" WHERE "user_id" = 1;`;
     pool.query(queryText)
     .then((result) => {
         res.send(result.rows);
