@@ -28,11 +28,14 @@ router.get('/info', rejectUnauthenticated, (req, res) => {
 /**
  * Add an item for the logged in user to the shelf
  */
-router.post('/', (req, res) => {
+router.post('/shelf', (req, res) => {
     const newList = req.body;
     const queryText = `INSERT INTO shelf("description", "image_url")
     VALUES ($1, $2);`;
-    const queryValues = []
+    const queryValues = [
+        newList.description,
+        newList.image_url,
+    ]
     pool.query(queryText, queryValues)
     .then(() => { res.sendStatus(201); })
     .catch((err) => {
