@@ -11,7 +11,9 @@ router.get('/info', rejectUnauthenticated, (req, res) => {
     console.log('/info GET route');
     console.log('is authenticated?', req.isAuthenticated());
     console.log('user', req.user); 
+
     let queryText = `SELECT * FROM "item" WHERE "user_id" = 1;`;
+
     pool.query(queryText)
     .then((result) => {
         res.send(result.rows);
@@ -28,7 +30,9 @@ router.get('/info', rejectUnauthenticated, (req, res) => {
 /**
  * Add an item for the logged in user to the shelf
  */
+
 router.post('/shelf', (req, res) => {
+
     const newList = req.body;
     const queryText = `INSERT INTO shelf("description", "image_url")
     VALUES ($1, $2);`;
