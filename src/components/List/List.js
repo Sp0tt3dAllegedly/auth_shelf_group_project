@@ -48,6 +48,7 @@ class List extends Component {
         // update inputs below to reflect correct information
         return (
             <>
+
             
                 <form onSubmit={this.addNewItem}>
                     <input type='text' placeholder='Description' value={this.state.newItem.description}
@@ -64,6 +65,7 @@ class List extends Component {
                         <li >
                             {item.description}<br />
                             <img src={item.image_url} alt="" />
+
 
 
                         </li> 
