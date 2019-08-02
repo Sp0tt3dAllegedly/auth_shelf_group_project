@@ -15,17 +15,23 @@ class List extends Component {
 
     render() {
         return (
-            <ul>
+            <>
+            <form>
+                
+            </form>
+
                 {this.props.reduxState.list.map(item => {
                     return (
-                        <li key={item.id}>
-                            <p>{item.description}<br /><img src={item.image_url} alt="" /></p>
+                        <ul key={item.id}>
+                        <li>{item.description}<br /><img src={item.image_url} alt="" />
 
-
-                        </li>    
+                        </li> 
+                        </ul>   
                     )
                 })}
-            </ul>)
+            
+            </>
+            );
                                                                       
 
 }
