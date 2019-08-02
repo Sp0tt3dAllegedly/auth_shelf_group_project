@@ -52,8 +52,18 @@ router.post('/shelf', (req, res) => {
 /**
  * Delete an item if it's something the logged in user added
  */
-router.delete('/:id', (req, res) => {
-
+router.delete('/delete:id', (req, res) => {
+     console.log('/info DELETE route');
+    console.log(req.body);
+    console.log('user', req.user);
+    let value = [req.user.user_id]
+    const sqlText = 'DELETE FROM item WHERE id=$1 and user_id=$2;';
+    pool.query(sqlText, [req.params.id], value)
+    .then(() => { res.sendStatus(200); })
+    .catch((err)=> {
+        console.log('---ERROR ERROR CAN NOT COMPLETE DELETE ERROR ERROR---', err);
+        res.sendStatus(500);
+    });
 });
 
 
